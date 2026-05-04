@@ -2,7 +2,7 @@
 
 Mindustry 使用 JavaScript 进行模组脚本编写。脚本使用 `js` 扩展名，并放在 `scripts/` 子目录中。
 
-执行从名为 `main.js` 的文件开始。任何其他脚本文件都可以由主文件通过 `require("script_name")` 导入。
+通常执行从名为 `main.js` 的文件开始；为兼容旧模组，如果 `scripts/` 下只有一个 `.js` 文件，游戏会直接执行该文件。其他脚本文件可以由主文件通过 `require("script_name")` 导入。
 典型设置如下：
 
 *scripts/main.js*:

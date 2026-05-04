@@ -36,7 +36,7 @@ Mindustry 逻辑中的变量还有一个称为**隐式转换**的机制。这意
 * `null` -> 0,
 * `Object`（例如热能坩埚（Silicon Crucible）） -> 1
 
-`print` 指令是唯一需要 `String` 作为输入的指令，因此它的规则会在本手册中对应的部分说明。
+`print` 指令支持字符串字面量，也会把数字和对象转换为文本输出；它的具体规则会在本手册中对应部分说明。
 
 ### 变量命名
 
@@ -52,7 +52,7 @@ Mindustry 逻辑中的变量还有一个称为**隐式转换**的机制。这意
 
 ## 处理器变量和常量
 
-常量也保存值，但不能被更改。每个处理器都内置了这些常量和变量：
+常量也保存值，但不能被更改。下面列出常见的处理器相关常量和变量；游戏还内置了 `true`、`false`、`null`、`@pi`、`@e`、`@degToRad`、`@radToDeg`、`@second`、`@minute`、`@waveNumber`、`@waveTime` 等全局值。
 
 ### 处理器
 
@@ -80,13 +80,11 @@ Mindustry 逻辑中的变量还有一个称为**隐式转换**的机制。这意
 
 表示处理器下一步将从哪一行读取代码的变量，等价于 x86 中的 `%IP`。它可以像其他变量一样被更改，从而作为另一种执行跳转的方法。
 
-一个（进阶）示例：设置 `@counter` 以跳转到函数，然后再跳回调用者：
+如果要给跳转目标命名，通常应使用 `jump label ...` 与 `label:`。直接写 `set @counter label` 不会解析标签名；只有当变量中保存的是数字指令行号时，才适合直接设置 `@counter`。
 
 ```
-op add retAddr @counter 1 # Save where we will continue after the function returns by adding 1 to the counter
-set @counter myFunc       # Jump to the line representing myFunc
-...
-set @counter retAddr      # Return to the line set earlier after the function is called
+set targetLine 10        # 手动保存目标指令行号
+set @counter targetLine  # 跳到该数字行号；label: 不会自动成为变量
 ```
 ### 链接
 
@@ -133,11 +131,11 @@ jump 1 lessThan linkIter @links # 继续循环
 
 #### @time `constant` `number`
 
-表示当前 UNIX 时间戳，*单位为毫秒*。
+表示当前存档的游戏时间，*单位为毫秒*。它来自地图/存档内经过的 tick，而不是现实世界的 UNIX 时间戳。
 
 #### @tick `constant` `float`
 
-表示地图开始以来经过的 tick 数量（每秒 60 tick）。
+表示当前存档的游戏时间，单位为 tick（每秒 60 tick）。
 
 #### @mapw `constant` `number`
 

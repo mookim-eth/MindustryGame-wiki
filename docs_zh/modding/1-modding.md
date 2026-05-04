@@ -99,7 +99,7 @@ Mindustry 使用 [Hjson](https://hjson.github.io/)。对于熟悉 JSON 的人来
 -   `displayName` 会用作 UI 中显示的名称，你可以为该名称添加格式。
 -   `description` 是模组说明，会在游戏内模组管理器中渲染，因此请保持简短并切中要点。
 -   `dependencies` 是可选项；如果想了解更多，请前往[依赖项](#dependencies)一节。
--   `minGameVersion` 是游戏的最低构建版本。它**必须**是大于 105 的数字。
+-   `minGameVersion` 是模组要求的最低游戏构建版本；请设置为你的模组实际支持的最低版本。v6 迁移模组通常至少应为 `105`。
 -   `hidden` 表示此模组是否隐藏并且不参与多人游戏模组同步检查，默认值为 `false`。仅材质包、纯客户端脚本、服务器插件等不创建新内容，且不要求所有玩家共同安装的模组才应使用 `hidden: true`。如果你的模组会创建物品、方块、单位等内容，就不应将其隐藏。
 
 
@@ -135,7 +135,7 @@ Mindustry 使用 [Hjson](https://hjson.github.io/)。对于熟悉 JSON 的人来
 
 |字段|类型|说明|
 |---|---|---|
-|type|String|此对象的内容类型。|
+|type|String|具体实现类型或类名，例如方块的 `GenericCrafter`、单位的 `flying`；内容类型由所在目录（如 `content/blocks/`）决定。|
 |name|String|内容显示名称。|
 |description|String|内容显示说明。|
 
@@ -146,7 +146,7 @@ Mindustry 使用 [Hjson](https://hjson.github.io/)。对于熟悉 JSON 的人来
 
 ## 类型
 
-类型有许多字段，但重要的是 `type`；这是内容解析器使用的一个特殊字段，会改变你的对象属于哪种类型。*`Router` 类型不能是 `Turret` 类型*，因为它们完全不同。
+类型有许多字段，但重要的是 `type`；这是内容解析器使用的特殊字段，用来选择具体实现类或单位实体构造方式。*`Router` 不能当作 `Turret` 使用*，因为它们完全不同。
 
 类型会相互 *extend*，因此如果 `MissileBulletType` 扩展了 `BasicBulletType`，那么你就能在 `MissileBulletType` 中访问 `BasicBulletType` 的所有字段，例如 `damage`、`lifetime` 和 `speed`。字段区分大小写：`hitSize =/= hitsize`。
 
@@ -154,7 +154,7 @@ Mindustry 使用 [Hjson](https://hjson.github.io/)。对于熟悉 JSON 的人来
 
 在这个单位示例中，该单位的类型是 `flying`。`bullet` 的类型是 `BulletType`，因此你可以使用 `MissileBulletType`，因为 `MissileBulletType` 扩展了 `BulletType`。
 
-这里也可以使用 `mech`、`legs`、`naval` 或 `payload` 作为单位类型。
+这里也可以使用 `mech`、`legs`、`naval`、`payload`、`missile`、`tank`、`hover`、`tether` 或 `crawl` 作为单位类型。
 
 ```hjson
 type: flying
@@ -227,7 +227,7 @@ weapons: [
 
 -   <https://github.com/Anuken/Mindustry/tree/master/core/assets-raw/sprites>
 
-关于贴图还需要知道的一点是，其中一些会被游戏修改。具体来说，炮塔会被添加黑色边框，因此制作贴图时必须考虑这一点，例如在炮塔周围留出透明空间：[浪涌（Ripple）](https://raw.githubusercontent.com/Anuken/Mindustry/master/core/assets-raw/sprites/blocks/turrets/ripple.png)
+关于贴图还需要知道的一点是，其中一些会被游戏修改。具体来说，炮塔和单位会被添加深灰/灰色描边，因此制作贴图时必须考虑这一点，例如在炮塔周围留出透明空间：[浪涌（Ripple）](https://raw.githubusercontent.com/Anuken/Mindustry/master/core/assets-raw/sprites/blocks/turrets/ripple.png)
 
 要覆盖游戏内内容贴图，只需把它们放入 `sprites-override/`。
 这会移除其 id 中的 `<modname>-` 前缀，使它们能够覆盖原版甚至其他模组的贴图。

@@ -70,7 +70,7 @@ Mindustry 中有两种主要数据类型：数字和对象。
 
 ### Target
 
-用于按特征筛选单位或方块目标的条件。主要用于 `radar`、`uradar` 和 `ulocate`。`radar` 和 `uradar` 拥有相同的 Target，但 `ulocate` 不同，因为它会寻找建筑。
+用于按特征筛选目标的条件。`radar` 和 `uradar` 主要搜寻单位，并拥有相同的 Target；`ulocate` 使用不同参数，因为它会搜寻建筑或地图位置。
 
 *完整列表可通过按下 `radar` 和 `uradar` 中“target”后的参数，或 `uradar` 中的“find”和“type”来显示。*
 
