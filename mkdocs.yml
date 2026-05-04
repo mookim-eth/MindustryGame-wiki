@@ -1,15 +1,24 @@
-site_name: Mindustry Wiki
+site_name: Mindustry 中文 Wiki
 site_url: https://mindustrygame.github.io/wiki/
 repo_url: https://github.com/MindustryGame/wiki
 docs_dir: 'docs_out'
 theme: 
   name: material
+  language: zh
   favicon: images/favicon.png
   logo: images/favicon.png
   custom_dir: overrides
   features:
+    - navigation.instant
+    - navigation.instant.prefetch
+    - navigation.instant.progress
     - navigation.tracking
     - content.code.copy
+plugins:
+  - search:
+      lang: zh
+hooks:
+  - hooks/nav_translate.py
 extra_css:
   - 'stylesheets/style.css'
 markdown_extensions:
