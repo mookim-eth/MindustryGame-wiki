@@ -97,10 +97,11 @@ set @counter retAddr      # Return to the line set earlier after the function is
 你可以将它与 `getlink` 一起使用，循环遍历所有已链接建筑，如下所示：
 
 ```
-set linkIter 0                  # Create iterator variable
-getlink block linkIter          # Get Building Object of the "linkIter"th linked building.
-# Do what you want with the building here
-jump 1 lessThan linkIter @links # Loop
+set linkIter 0                  # 创建迭代变量
+getlink block linkIter          # 获取第 linkIter 个已链接建筑
+# 在这里处理该建筑
+op add linkIter linkIter 1      # 移动到下一个链接
+jump 1 lessThan linkIter @links # 继续循环
 ```
 
 #### `<buildingName><n>` `constant` `Building`

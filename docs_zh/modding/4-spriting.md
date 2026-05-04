@@ -332,7 +332,7 @@ Mindustry 是 2D 游戏，因此为了添加高度和凹陷等深度，我们需
 
 ![](https://raw.githubusercontent.com/Anuken/Mindustry/master/core/assets-raw/sprites/units/fortress.png) ![](https://raw.githubusercontent.com/Anuken/Mindustry/master/core/assets-raw/sprites/units/fortress-cell.png)
 
-上图是带有 Cell 的堡垒（Fortress）。游戏会自动把**白色**(#FFFFF) 和**棕褐色**(#DCC6C6) 替换为队伍颜色的不同明暗。你的 Cell 贴图只应包含下面两种明暗：
+上图是带有 Cell 的堡垒（Fortress）。游戏会自动把**白色**（`#FFFFFF`）和**棕褐色**（`#DCC6C6`）替换为队伍颜色的不同明暗。你的 Cell 贴图只应包含下面两种明暗：
 
   - ![](https://via.placeholder.com/15/ffffff/000000?text=+) `FFFFFF` | 亮色调
   - ![](https://via.placeholder.com/15/dcc6c6/000000?text=+) `DCC6C6` | 暗色调
