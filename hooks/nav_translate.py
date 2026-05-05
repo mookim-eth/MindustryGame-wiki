@@ -21,6 +21,8 @@ NAV_TRANSLATIONS = {
     "Statuses": "状态效果",
     "Planets": "星球",
     "Logic": "逻辑",
+    "Guides": "攻略",
+    "guides": "攻略",
     # Wiki-specific sections; no exact in-game category exists.
     "Modding": "模组制作",
     "Modding Classes": "模组类参考",
